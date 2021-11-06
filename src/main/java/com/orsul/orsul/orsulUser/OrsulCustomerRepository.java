@@ -1,0 +1,25 @@
+package com.orsul.orsul.orsulUser;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
+
+@Repository
+@Transactional(readOnly = true)
+public interface OrsulCustomerRepository extends JpaRepository<OrsulUser, Long> {
+
+
+    Optional<OrsulUser> findByEmail(String email);
+    Optional<OrsulUser> findByUsernameAndPassword(String username,String password);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE OrsulUser a " +
+            "SET a.enabled = TRUE WHERE a.email = ?1")
+    int enableAppUser(String email);
+
+}
