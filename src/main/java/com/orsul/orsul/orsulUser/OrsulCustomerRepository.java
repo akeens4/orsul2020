@@ -1,5 +1,6 @@
 package com.orsul.orsul.orsulUser;
 
+import com.orsul.orsul.login.LoginForm;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,7 +15,6 @@ public interface OrsulCustomerRepository extends JpaRepository<OrsulUser, Long> 
 
 
     Optional<OrsulUser> findByEmail(String email);
-    Optional<OrsulUser> findByUsernameAndPassword(String username,String password);
 
     @Transactional
     @Modifying

@@ -1,5 +1,6 @@
 package com.orsul.orsul.orsulUser;
 
+import com.orsul.orsul.login.LoginForm;
 import com.orsul.orsul.registration.token.ConfirmationToken;
 import com.orsul.orsul.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
@@ -30,12 +31,11 @@ public class OrsulUserService implements UserDetailsService {
             return customerRepository.findByEmail(email)
                     .orElseThrow(() -> new UsernameNotFoundException(
                             String.format(USER_NOT_FOUND_MSG,email)));
-
     }
 
-    public Optional<OrsulUser> login(String username, String password) {
-        Optional<OrsulUser> orsulUser = customerRepository.findByUsernameAndPassword(username,password);
-        return orsulUser;
+    public Optional<LoginForm> login(String username, String password) {
+        Optional<LoginForm> loginForm = customerRepository.findByUsernameAndPassword(username,password);
+        return loginForm;
     }
 
     public String signUpUser(OrsulUser orsulUser) {
